@@ -1,40 +1,69 @@
 #include <stdio.h>
 
-int main(){
-	
-	int op;
-	float num1, num2;
+int menuInicial(){
 
-	scanf("%f",&num1);
-	scanf("%f",&num2);
+	int op;
+
+	printf("1 - SOMA\n2 - SUBTRACAO\n3 - MULTIPLICACAO\n4 - DIVISAO\n");
 	scanf("%d",&op);
 
-	switch(op){
+	return op;
+}
 
-		case 1:{
-			printf("%f", num1+num2);
+float soma(float a, float b){
+
+	return a + b;
+}
+
+float subtracao(float a, float b){
+
+	return a - b;
+}
+
+float multiplicacao(float a, float b){
+
+	return a * b;
+}
+
+float divisao(float a, float b){
+
+	return a / b;
+}
+
+int main(){
+
+	int opmenu = 0;
+	float a, b, res;
+
+	scanf("%f",&a);
+	scanf("%f",&b);
+
+	opmenu = menuInicial();
+
+	switch(opmenu){
+		case 1: {
+			res = soma(a, b);
 			break;
 		}
-		case 2:{
-			printf("%f", num1-num2);
+		case 2: {
+			res = subtracao(a, b);
 			break;
 		}
-		case 3:{
-			printf("%f", num1*num2);
+		case 3: {
+			res = multiplicacao(a, b);
 			break;
 		}
-		case 4:{
-			printf("%f", num1/num2);
-			break;
-		}
-		case 0:{
-			printf("Finishing...");
+		case 4: {
+			res = divisao(a, b);
 			break;
 		}
 		default:{
-			printf("Invalid Option");
+			printf("Opcao Invalida");
+			break;
 		}
 	}
 
+	printf("%f", res);
+
 	return 0;
-}
+}	
