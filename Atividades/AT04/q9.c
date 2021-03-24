@@ -41,7 +41,6 @@ void cadastrarCliente(struct Cliente *cliente){
 	printf("%d\n",nomeValidado);
 }
 
-
 int validarNome(char *nomeCliente){
 
 	int tam = 0, i;
