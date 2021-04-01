@@ -40,6 +40,8 @@ void listarAlunos();
 
 void listarProfessores();
 
+void listarDisciplinas();
+
 int menuInicial();
 
 int menuRelatorio();
@@ -85,6 +87,10 @@ int main(){
                         case 2: {
                                 listarProfessores(professores, qtdProfessores);
                             break;
+                        }
+                        case 3: {
+                        		listarDisciplinas(disciplinas, qtdDisciplnas);
+                        		break;
                         }
                     }
                 break;
@@ -222,6 +228,18 @@ void listarProfessores(Fichaprofessor *professores, int qtdProfessores){
         printf("SEXO DO PROFESSOR: %c", professores[i].sexo);
         printf("DATA DE NASCIMENTO: %d/%d/%d\n", professores[i].data_nascimento.dia, professores[i].data_nascimento.mes, professores[i].data_nascimento.ano);
     }
+}
+
+void listarDisciplinas(Fichadisciplina *disciplinas, int qtdDisciplnas){
+
+	int i;
+
+	for(i=0;i<qtdDisciplnas;i++){
+		printf("CODIGO DA DISCIPLINA: %s", disciplinas[i].codigo);
+		printf("NOME DA DISCIPLINA: %s", disciplinas[i].nome);
+		printf("NOME DO PROFESSOR: %s", disciplinas[i].professor);
+		printf("SEMESTRE: %d\n\n", disciplinas[i].semestre);
+	}
 }
 
 int menuRelatorio(){
