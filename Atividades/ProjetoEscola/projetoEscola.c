@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct dma{
 
@@ -44,11 +45,16 @@ void listarDisciplinas();
 
 int menuInicial();
 
+int gerenciarAlunos();
+
+void atualizarAluno();
+
 int menuRelatorio();
 
 int main(){
     
     int sair = 0, opcao, qtdAlunos = 0, submenu, qtdProfessores = 0, qtdDisciplnas = 0, i = 0;
+    int menuAlunos;
     Fichaaluno alunos[10];
     Fichaprofessor professores[10];
     Fichadisciplina disciplinas[10];
@@ -95,8 +101,22 @@ int main(){
                     }
                 break;
             } 
-            //CHAMAR FUNÇÃO EMITIR RELATÓRIO; -> INICIAR SUBFUNCOES DE RELATORIOS
             case 5:{
+            	menuAlunos = gerenciarAlunos();
+
+            	switch(menuAlunos){
+
+            		case 1: {
+            			atualizarAluno(alunos, qtdAlunos);
+            			break;
+            		}
+            	}
+            	//CHAMAR FUNÇÃO GERENCIAR ALUNOS -> INICIAR SUBFUNÇÕES DE GERENCIAMENTO DE ALUNOS
+            	break;
+            }
+
+            //CHAMAR FUNÇÃO EMITIR RELATÓRIO; -> INICIAR SUBFUNCOES DE RELATORIOS
+            case 6:{
                 printf("\n| PROJETO ESCOLA FINALIZADO |\n\n");
                 sair = 1;
                 break;
@@ -198,7 +218,7 @@ int menuInicial(){
     int opcao;
     
     printf("MENU INICIAL\nDIGITE A OPCAO DESEJADA:\n1 - CADASTRAR ALUNO\n2 - CADASTRAR PROFESSOR\n3 - CADASTRAR DISCIPLINA");
-    printf("\n4 - EMITIR RELATORIO\n5 - SAIR\nDigite o numero da opcao:  ");
+    printf("\n4 - EMITIR RELATORIO\n5 - GERENCIAR ALUNOS\n6 - SAIR\nDigite o numero da opcao:  ");
     scanf("%d",&opcao);
     
     return opcao;
@@ -242,6 +262,23 @@ void listarDisciplinas(Fichadisciplina *disciplinas, int qtdDisciplnas){
 	}
 }
 
+void atualizarAluno(Fichaaluno *alunos, int qtdAlunos){
+
+	int i;
+	char chaveBusca[10];
+
+	setbuf(stdin, NULL);
+	printf("INFORME O NUMERO DA MATRÍCULA: ");
+	fgets(chaveBusca, 10, stdin);
+	
+	for(i=0;i<qtdAlunos;i++){
+		if (strstr(chaveBusca, alunos[i].matricula) != 0 ){
+			printf("NOME DO ALUNO: %s\n", alunos[i].nome);
+			// INLCUIR CAMPOS PARA ALTERAÇÃO
+		}
+	}
+}
+
 int menuRelatorio(){
 
     int opcao;
@@ -252,4 +289,15 @@ int menuRelatorio(){
     scanf("%d",&opcao);
 
     return opcao;
+}
+
+int gerenciarAlunos(){
+
+	int opcao;
+
+	printf("1 - ATUALIZAR DADOS DO ALUNO\n2 - INCLUIR EM UMA DISCIPLINA\n3 - EXCLUIR ALUNO");
+	printf("\nDigite o numero da opcao: ");
+	scanf("%d",&opcao);
+
+	return opcao;
 }
